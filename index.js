@@ -1,11 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const articles = require('./articles');
 
-const port = process.env.PORT || 3000;
-
 
 const app = express();
+app.set('port', process.env.PORT || 3000);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send('Hello world');
@@ -16,6 +18,10 @@ app.get('/articles', (req, res, next) => {
 });
 
 app.post('/articles', (req, res, next) => {
+  const { title } = req.body;
+  const article = { title };
+  articles.push(article);
+  
   res.send('Ok');
 });
 
@@ -32,8 +38,8 @@ app.delete('/articles/:id', (req, res, next) => {
   res.send({ message: 'Deleted' });
 });
 
-app.listen(port, () => {
-  console.log(`Express localhost:${port}`);
+app.listen(app.get('port'), () => {
+  console.log(`Express localhost:${app.get('port')}`);
 });
 
 module.exports = app;
