@@ -1,7 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from 'express';
+import bodyParser from 'body-parser';
 
-const articles = require('./articles');
+import articles from './articles';
 
 
 const app = express();
@@ -13,24 +13,23 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-app.get('/articles', (req, res, next) => {
+app.get('/articles', (req, res) => {
   res.send(articles);
 });
 
-app.post('/articles', (req, res, next) => {
+app.post('/articles', (req, res) => {
   const { title } = req.body;
   const article = { title };
   articles.push(article);
-  
   res.send('Ok');
 });
 
-app.get('/articles/:id', (req, res, next) => {
+app.get('/articles/:id', (req, res) => {
   const { id } = req.params;
   res.send(articles[id]);
 });
 
-app.delete('/articles/:id', (req, res, next) => {
+app.delete('/articles/:id', (req, res) => {
   const { id } = req.params;
 
   delete articles[id];
