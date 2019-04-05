@@ -1,7 +1,11 @@
 module.exports = {
-    "extends": "airbnb-base",
-    "rules": {
-        "linebreak-style": 0,
-        "no-trailing-spaces": 0
-      }
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "singleQuote": true
+    }],
+    "linebreak-style": 0,
+    "no-trailing-spaces": 0
+  }
 };

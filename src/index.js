@@ -1,8 +1,8 @@
 import express from 'express';
+
 import bodyParser from 'body-parser';
 
 import articles from './articles';
-
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
