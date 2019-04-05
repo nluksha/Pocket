@@ -21,6 +21,7 @@ app.post('/articles', (req, res) => {
   const { title } = req.body;
   const article = { title };
   articles.push(article);
+
   res.send('Ok');
 });
 
