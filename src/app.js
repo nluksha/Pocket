@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import articles from './articles';
+import read from 'node-readability';
+import articlesJson from './articles';
+import { Article } from './db';
 
 const app = express();
 app.use(bodyParser.json());
@@ -10,29 +12,62 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-app.get('/articles', (req, res) => {
-  res.send(articles);
+app.get('/art', (req, res) => {
+  res.send(articlesJson);
 });
 
-app.post('/articles', (req, res) => {
-  const { title } = req.body;
-  const article = { title };
-  articles.push(article);
+app.get('/articles', (req, res, next) => {
+  Article.all((err, articles) => {
+    if (err) {
+      return next(err);
+    }
 
-  res.send('Ok');
+    res.send(articles);
+  });
 });
 
-app.get('/articles/:id', (req, res) => {
+app.post('/articles', (req, res, next) => {
+  const { url } = req.body;
+
+  read(url, (err, result) => {
+    if (err || !result) {
+      return res.status(500).send('Error downloading article');
+    }
+
+    const { title, content } = result;
+
+    Article.create({ title, content }, (error, article) => {
+      if (error) {
+        return next(error);
+      }
+
+      res.send(article);
+    });
+  });
+});
+
+app.get('/articles/:id', (req, res, next) => {
   const { id } = req.params;
-  res.send(articles[id]);
+
+  Article.find(id, (err, article) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.send(article);
+  });
 });
 
-app.delete('/articles/:id', (req, res) => {
+app.delete('/articles/:id', (req, res, next) => {
   const { id } = req.params;
 
-  delete articles[id];
+  Article.delete(id, err => {
+    if (err) {
+      return next(err);
+    }
 
-  res.send({ message: 'Deleted' });
+    res.send({ message: 'Deleted' });
+  });
 });
 
 module.exports = app;

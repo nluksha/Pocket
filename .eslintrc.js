@@ -5,6 +5,7 @@ module.exports = {
     "prettier/prettier": ["error", {
       "singleQuote": true
     }],
+    "consistent-return": 0,
     "linebreak-style": 0,
     "no-trailing-spaces": 0
   },
