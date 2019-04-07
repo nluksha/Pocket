@@ -5,6 +5,7 @@ import articlesJson from './articles';
 import { Article } from './db';
 
 const app = express();
+app.use('/css/bootstrap.css', express.static('node_modules/bootstrap/dist/css/bootstrap.css'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

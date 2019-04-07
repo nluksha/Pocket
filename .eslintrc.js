@@ -3,7 +3,8 @@ module.exports = {
   "plugins": ["prettier", "jest"],
   "rules": {
     "prettier/prettier": ["error", {
-      "singleQuote": true
+      "singleQuote": true,
+      "printWidth": 120
     }],
     "consistent-return": 0,
     "linebreak-style": 0,
