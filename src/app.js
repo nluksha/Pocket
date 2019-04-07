@@ -22,7 +22,10 @@ app.get('/articles', (req, res, next) => {
       return next(err);
     }
 
-    res.send(articles);
+    res.format({
+      'text/html': () => res.render('articles.ejs', { articles }),
+      '*/json': () => res.send(articles)
+    });
   });
 });
 
