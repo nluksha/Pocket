@@ -40,12 +40,12 @@ app.post('/articles', (req, res, next) => {
 
     const { title, content } = result;
 
-    Article.create({ title, content }, (error, article) => {
+    Article.create({ title, content }, error => {
       if (error) {
         return next(error);
       }
 
-      res.send(article);
+      res.redirect('/articles');
     });
   });
 });
