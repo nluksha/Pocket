@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.redirect('/articles');
 });
 
 app.get('/art', (req, res) => {
@@ -58,7 +58,10 @@ app.get('/articles/:id', (req, res, next) => {
       return next(err);
     }
 
-    res.send(article);
+    res.format({
+      'text/html': () => res.render('articleDetailes.ejs', { article }),
+      '*/json': () => res.send(article)
+    });
   });
 });
 

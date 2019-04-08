@@ -1,11 +1,9 @@
 <% include head %>
-<ul>
+<div class="list-group">
   <% articles.forEach(article => { %>
-    <li>
-      <a href="/articles/<%= article.id %>" >
-        <%= article.title %>
-      </a>
-    </li>
+    <a href="/articles/<%= article.id %>" class="list-group-item list-group-item-action">
+      <%= article.title %>
+    </a>
   <% }) %>
-</ul>
+</div>
 <% include foot %>

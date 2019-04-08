@@ -5,7 +5,7 @@ import app from './app';
 describe('Test the root app path', () => {
   test('It should response the GET method', done => {
     request(app)
-      .get('/')
+      .get('/articles')
       .then(response => {
         expect(response.statusCode).toBe(200);
         done();
