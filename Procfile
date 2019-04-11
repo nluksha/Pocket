@@ -1,1 +1,1 @@
-web: babel dist/index.js
+web: rimraf dist && mkdir dist && babel src --out-dir dist && node dist/index.js
