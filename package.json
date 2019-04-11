@@ -10,6 +10,7 @@
     "clean": "rimraf dist && mkdir dist",
     "build-babel": "babel src --out-dir dist",
     "build": "npm run clean && npm run build-babel",
+    "deploy": "git push heroku master && heroku open",
     "lint": "eslint .",
     "start": "nodemon --exec babel-node src/index.js",
     "test": "jest"
