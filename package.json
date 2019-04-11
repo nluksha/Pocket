@@ -7,14 +7,18 @@
   },
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist && mkdir dist",
+    "build-babel": "babel src --out-dir dist",
+    "build": "npm run clean && npm run build-babel",
     "lint": "eslint .",
-    "start": "nodemon --exec babel-node index.js",
+    "start": "nodemon --exec babel-node src/index.js",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "ejs": "^2.6.1",
