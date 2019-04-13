@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist && mkdir dist",
-    "build-babel": "babel src --out-dir dist",
+    "build-babel": "./node_modules/.bin/babel src --out-dir dist",
     "build": "npm run clean && npm run build-babel",
     "deploy": "git push heroku master && heroku open",
     "lint": "eslint .",
