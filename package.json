@@ -12,7 +12,7 @@
     "build": "npm run clean && npm run build-babel",
     "deploy": "git push heroku master && heroku open",
     "lint": "eslint .",
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon --exec babel-node src/index.js ",
     "heroku": "npm run build && node dist/index.js",
     "heroku-local": "heroku local web",
     "test": "jest"
